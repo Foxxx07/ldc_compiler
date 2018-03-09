@@ -13,8 +13,13 @@ const keywords = {
     'private-accessor': { r: /(private\s)/, s: 'private' },
     'protected-accessor': { r: /(protected\s)/, s: 'protected' },
     'static-element': { r: /(static\s)/, s: 'static' },
-    'while-condition': { r: /(while\s*\(+\s?)/, s: 'while(' },
-    'if-condition': { r: /(if\s*\(+\s?)/, s: 'if' },
+    'while-condition': { r: /(while)/, s: 'while' },
+    'if-condition': { r: /(if)/, s: 'if' },
+    'else-condition': { r: /(else)/, s: 'else' },
+    'for-condition': { r: /(for)/, s: 'for' },
+    'HashMap': { r: /(HashMap)/, s: 'HashMap' },
+    'HashSet': { r: /(HashSet)/, s: 'HashSet' },
+    'object-declaration': { r: /(Object)/, s: 'Object' },
     'class': { r: /(class\s)/, s: 'class' }
 
 };
