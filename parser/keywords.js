@@ -9,5 +9,4 @@ const keywords = {
   'console-object': { r: /(System)/, s: 'System' }
 };
 
-
 module.exports = keywords;
