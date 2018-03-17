@@ -12,7 +12,7 @@ class Tokenizer {
         let items ;
         let debugInc = 0;
         do {
-            DataTransferItemList = file_in.substring(this.cursor);
+            items = file_in.substring(this.cursor);
             this.addToken(items);
             debugInc++;
         } while(item.length > 0 && debugInc < 2) ;
