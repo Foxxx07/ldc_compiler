@@ -16,7 +16,8 @@ if (fs.existsSync(entryPoint)){
     //console.log("Ok sa exist");
     let tokenizer = new Tokenizer();
     let tokens = tokenizer.tokenisation(fs.readFileSync(entryPoint,'utf8'));
-
+    fs.closeSync;
+    console.log(tokens);
 
 } else {
     console.log("Error : Couldn't find the entry point : "+entryPoint);

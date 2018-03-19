@@ -1,5 +1,5 @@
 class Token {
-    constructor(type, value, pos){
+    constructor(type, value = null, pos = null){
         this.type = type;
         this.value = value;
         this.pos = pos;

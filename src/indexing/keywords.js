@@ -8,6 +8,7 @@ const keywords = {
     'float-declaration': { r: /(float\s)/, s: 'float' },
     'short-declaration': { r: /(short\s)/, s: 'short' },
     'long-declaration': { r: /(long\s)/, s: 'long' },
+    'void-declaration': { r: /(void\s)/, s: 'void' },
     'object-declaration': { r: /(Object\s)/, s: 'Object' },
 
     'public-accessor': { r: /(public\s)/, s: 'public' },
@@ -21,6 +22,7 @@ const keywords = {
 
     'console-object': { r: /(System)/, s: 'System' },
     'static-element': { r: /(static\s)/, s: 'static' },
+    'main-element': { r: /(main)/, s: 'main' },
     'hashMap': { r: /(HashMap)/, s: 'HashMap' },
     'hashSet': { r: /(HashSet)/, s: 'HashSet' },
     'class': { r: /(class\s)/, s: 'class' }
