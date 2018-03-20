@@ -49,7 +49,7 @@ export default class TokenFactory{
 				  sub_char = value.charAt(sub_current)
 				  if (sub_char === '"') {
 					sub_current++
-					return new Token('object-string', value.substring(0, sub_current), pos);
+					return new Token('string-declaration', value.substring(0, sub_current), pos);
 				  }
 				  sub_current++
 				}
@@ -79,7 +79,7 @@ export default class TokenFactory{
 					isFloat = true
 				  }
 
-				  if (!isDigit(sub_char) && sub_char !== '.') {
+				  if (!TokenFactory.isDigit(sub_char) && sub_char !== '.') {
 					return new Token(isFloat ? 'number-float' : 'number', value.substring(0, sub_current), pos);
 					current += sub_current
 					break
@@ -111,16 +111,17 @@ export default class TokenFactory{
 			
 		}
 	}
+
+    static isDigit(sub_char) {
+        const DIGIT = /([0-9])/;
+        return sub_char.match(DIGIT)
+    }
 	
 	static isAlpha(val) {
 		const ALPHA = /([A-Z]|[a-z])/;
 		return val.match(ALPHA)
 	}
 
-	static isDigit(val) {
-		const DIGIT = /([0-9])/;
-		return val.match(DIGIT)
-	}
 	
 	static checkKeywords(slice){
 		const keywords_keys = Object.keys(keywords);

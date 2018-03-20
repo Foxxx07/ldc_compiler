@@ -20,7 +20,10 @@ const keywords = {
     'HashMap': { r: /(HashMap)/, s: 'HashMap' },
     'HashSet': { r: /(HashSet)/, s: 'HashSet' },
     'object-declaration': { r: /(Object)/, s: 'Object' },
-    'class': { r: /(class\s)/, s: 'class' }
+    'class': { r: /(class)/, s: 'class' },
+    'void': { r: /(void\s)/, s: 'void' },
+    'main': { r: /(main\s)/, s: 'main' },
+    'class-name': { r: /([A-Za-z0-9]\s)/, s: '[A-Za-z0-9]' }
 
 };
 

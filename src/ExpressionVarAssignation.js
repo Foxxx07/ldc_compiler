@@ -17,6 +17,7 @@ export default class ExpressionVarAssignation extends Expression{
 			case 'boolean-declaraction':
 			case 'number':
 			case 'number-float':
+			case 'class-name':
 				this.variableValue= token_value;
 				break;
 			default:

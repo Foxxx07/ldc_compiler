@@ -28,6 +28,8 @@ export default class ASTParser{
 				case'pipe':
 				case'angle-bracket-start':
 				case'angle-bracket-end':
+				case'public-accessor':
+				case'class':
 					continue;
 				default:
 					let exp = ExpressionFactory.create(cursor, tokens);
