@@ -22,6 +22,7 @@ const keywords = {
 
     'console-object': { r: /(System)/, s: 'System' },
     'static-element': { r: /(static\s)/, s: 'static' },
+    'final-element': { r: /(final\s)/, s: 'final' },
     'main-element': { r: /(main)/, s: 'main' },
     'hashMap': { r: /(HashMap)/, s: 'HashMap' },
     'hashSet': { r: /(HashSet)/, s: 'HashSet' },

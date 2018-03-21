@@ -2,6 +2,7 @@
 'use strict';
 
 import  Tokenizer from "./indexing/Tokenizer";
+import Parser from "./parsing/Parser";
 
 const fs = require('fs');
 const args = process.argv;
@@ -17,7 +18,9 @@ if (fs.existsSync(entryPoint)){
     let tokenizer = new Tokenizer();
     let tokens = tokenizer.tokenisation(fs.readFileSync(entryPoint,'utf8'));
     fs.closeSync;
-    console.log(tokens);
+    //console.log(tokens);
+    let parser = new Parser();
+    parser.parse(tokens);
 
 } else {
     console.log("Error : Couldn't find the entry point : "+entryPoint);
