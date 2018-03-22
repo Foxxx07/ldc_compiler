@@ -89,7 +89,7 @@ class ExpressionFactory {
                         //console.log(nextToken.type);
 
                         let index = this.data.expr.childs.findIndex( c => c.type === nextToken.type);
-                       // let identifier = this.data.expr.childs.findIndex( c => c.type === "identifier");
+                       let identifier = this.data.expr.childs.findIndex( c => c.type === "identifier");
 
                         if (index != -1 && nextToken.type != "curly-bracket-start") {
                             this.data.errs.push("Error identifier is expected after class element at line :"+this.data.lines);
