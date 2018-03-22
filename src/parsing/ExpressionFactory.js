@@ -11,11 +11,9 @@ class ExpressionFactory {
         if(typeof(currentToken) != "undefined"){
             currentTokenType = currentToken.type;
         }
+
         let util  = new Util();
-
         let i = pos;
-
-        //i++;
         let nextToken ;
 
         switch(currentTokenType) {
@@ -25,13 +23,11 @@ class ExpressionFactory {
             case "static-element" :
             case "final-element" :
 
-               // let i = pos;
                 let counterAccessor = this.isAccesor(currentToken);
                 let counterParentheses = 0;
                 let counterCurlyBrackets = 0;
                 let stopcounterAccessor = false;
                 i++;
-                //let nextToken ;
                 this.data.expr.addChild(currentToken);
                 while ( i < tokens.length ) {
                     nextToken = tokens[i];
@@ -86,13 +82,15 @@ class ExpressionFactory {
                     nextToken = tokens[i];
 
                     if (!this.isSpace(nextToken)) {
-                        //console.log(nextToken.type);
-
                         let index = this.data.expr.childs.findIndex( c => c.type === nextToken.type);
-                       let identifier = this.data.expr.childs.findIndex( c => c.type === "identifier");
+                        let identifier = this.data.expr.childs.findIndex( c => c.type === "identifier");
 
-                        if (index != -1 && nextToken.type != "curly-bracket-start") {
-                            this.data.errs.push("Error identifier is expected after class element at line :"+this.data.lines);
+                        if(index != -1 && nextToken.type != "curly-bracket-start") {
+                            if (identifier) {
+                                this.data.errs.push("Error Can't have multiple identifier at line :" + this.data.lines);
+                            } else {
+                                this.data.errs.push("Error identifier is expected after class element at line :" + this.data.lines);
+                            }
                             this.data.score = this.data.score - 2;
                         }else if ((nextToken.type == "curly-bracket-start")) {
                             this.data.inc = i;
@@ -101,13 +99,14 @@ class ExpressionFactory {
                         }else if(nextToken.type !== "curly-bracket-start" && identifier == 1){
                             this.data.errs.push("Error bracket start is expected after identifier in class element at line :"+this.data.lines);
                             this.data.score = this.data.score - 2;
-                        } else{
+                        }else{
                             this.data.inc = i;
                             this.data.expr.addChild(nextToken);
                         }
                     }
                     i++;
                 }
+                break;
             default :
                 this.data.expr.addChild(currentToken);
                 this.data.inc = pos+1;
