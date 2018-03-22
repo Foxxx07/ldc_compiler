@@ -1,45 +1,85 @@
 import Expression from "./Expression";
-
+import Data from "./Data";
+import Util from "../utils/Util";
  class ExpressionFactory {
     constructor(){
-        this.expr = new Expression();
+        this.data = new Data();
+        let util  = new Util();
     }
 
-      createExpression(tokens, positionCurrentToken){
-        let currentToken = tokens[positionCurrentToken];
-        
-        switch(currentToken.type){
-            case 'public-accessor':
-            case 'private-accessor':
-            case 'final-element':
-            case 'static-element':
-                if (this.expr.childs.length > 0){
-                    if (this.expr.childs.indexOf(currentToken.type) != -1){
-                        console.log('Can\'t specified '+currentToken.type+' more than once.');
-                        return;
-                    } else if (this.expr.childs.length >= 3) {
-                        throw "Error : uncorrect number of elements : ";   
-                    } else {
-                        this.expr.addChild(currentToken.type);
-                    }
-                } else {
-                    this.expr.addChild(currentToken.type);
-                }
-                console.log( this.expr.childs.length > 0)
-                console.log( this.expr.childs.length)
+    createExpression(tokens,pos){
+        let currentToken = tokens[pos];
+        let currentTokenType = currentToken.type;
+        switch(currentTokenType) {
+            case "public-accessor" :
+            case "private-accessor" :
+            case "protected-accessor":
+            case "static-element" :
+            case "final-element" :
 
-                positionCurrentToken++;
-                let nextToken = tokens[positionCurrentToken];
-                if (nextToken.type != "space") {
-                    throw "You must specified a space after a "+currentToken.type;
+                let i = pos;
+                let counterAccessor = this.isAccesor(currentToken);
+                let counterParentheses = 0;
+                let stopcounterAccessor = false;
+                i++;
+                let nextToken ;
+                this.data.expr.addChild(currentToken);
+                while ( i < tokens.length ) {
+                    nextToken = tokens[i];
+                   
+                    if (!this.isSpace(nextToken)) {
+                        counterAccessor += this.isAccesor(nextToken);
+                        let index = this.data.expr.childs.findIndex( c => c.type === nextToken.type);
+                        if (index != -1) {
+                            this.data.errs.push("Error multiple accessor "+nextToken.type+" at line :"+this.data.lines);
+                        } else if (counterAccessor > 1 && !stopcounterAccessor){
+                            this.data.errs.push("Error more than once accessor used at line :"+this.data.lines);
+                            stopcounterAccessor = true;
+                        } else if ( (nextToken.type == "instruction-end") || (nextToken.type == "curly-bracket-start")) {
+                            this.data.inc = i;
+                            this.data.expr.addChild(nextToken);
+                          //  console.log(counterParentheses + "counterParenthesis")
+                          
+                          this.data = util.countParenthesis(counterParentheses,this.data);
+                          //this.data.countParenthesis(counterParentheses,this.data);
+
+                            return this.data;
+                        } else if (nextToken.type == "line-break"){
+                            this.data.setLines(this.data.lines+1);
+                        } else if (nextToken.type == "parenthesis-start"){
+                            counterParentheses++;
+//console.log("nb parenthesis : " + counterParentheses);
+
+                        } else if (nextToken.type == "parenthesis-end"){
+                            counterParentheses--;
+                           // console.log("nb parenthesis : " + counterParentheses);
+
+                        }else if (nextToken.type == "line-break"){
+                            this.data.setLines(this.data.lines+1);
+                        } else {
+                                this.data.inc = i;
+                                this.data.expr.addChild(nextToken);
+                        }
+
+                       // console.log(nextToken.type );
+                    }
+                    i++;
                 }
-                positionCurrentToken++;
-                this.createExpression(tokens,positionCurrentToken);
-            case 'class':
-            console.log("pika");
-            break;
-            
+                this.data.inc = i;
+                return this.data;
+            default :
+                this.data.expr.addChild(currentToken);
+                this.data.inc = pos+1;
+                return this.data;
         }
+    }
+
+    isSpace(token){
+        return token.type == "space";
+    }
+
+    isAccesor(token){
+        return token.type.match(/.*accessor/g) ? 1 : 0 ;
     }
 }
 
