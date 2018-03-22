@@ -24,7 +24,7 @@ if (fs.existsSync(entryPoint)){
     let parser = new Parser();
     console.log("---------ERRORS---------\n");
     parser.parse(tokens);
-    console.log("---------END ERRORS-----\n");
+    console.log("---------END-----\n");
 
 } else {
     console.log("Error : Couldn't find the entry point : "+entryPoint);

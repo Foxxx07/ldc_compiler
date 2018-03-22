@@ -7,17 +7,21 @@ class Parser {
     parse(tokens){
         let i = 0;
         let lines = 1;
+        let score = 20;
         while( i <= tokens.length) {
-           // console.log(tokens.length)
+            // console.log(tokens.length)
             let currentToken = tokens[i];
-            let tokenType = currentToken.type;
-           // console.log(currentToken);
+            let tokenType;
+            if(typeof(currentToken) != "undefined"){
+                tokenType = currentToken.type;
+            }
+            // console.log(currentToken);
             switch(tokenType) {
                 case 'space':
                 case 'line-break-r':
                 case 'console-object':
                 case 'dot':
-              //  case 'parenthesis-start':
+                //  case 'parenthesis-start':
                 //case 'parenthesis-end':
                 case 'identifier':
                 case 'bracket-start':
@@ -35,25 +39,33 @@ class Parser {
                     //console.log("LINES  = "+ lines)
                     let expressionFactory = new ExpressionFactory();
                     expressionFactory.data.lines = lines;
+                    expressionFactory.data.score = score;
                     let data = expressionFactory.createExpression(tokens,i);
                     //console.log(data);
                     // console.log("inc = "+data.inc)
                     //console.log("token length = "+tokens.length)
                     // console.log(data.expr.childs);
+
                     if (data.errs.length > 0){
                         for (var j in data.errs){
                             console.log(data.errs[j]);
                         }
                         console.log("\n");
                     }
-
                     i = data.inc;
+                    //this.score(data);
                     //console.log("i = "+i);
                     break;
             }
             i++;
         }
     }
+
+    /*score(data){
+        console.log("---------Score---------\n");
+
+        console.log(data.score + "/20");
+    }*/
 }
 
 export default Parser;

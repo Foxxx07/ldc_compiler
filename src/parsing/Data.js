@@ -6,10 +6,19 @@ class Data {
         this.errs = [];
         this.inc = 0;
         this.lines = 0;
+        this.score = 0;
     }
 
     setLines(lines){
         this.lines = lines;
+    }
+
+    setScore(score){
+        this.score = score;
+    }
+
+    getScore(){
+        return this.score;
     }
 
     countParenthesis(counterParentheses, data) {

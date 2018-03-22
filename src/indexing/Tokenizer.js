@@ -37,6 +37,8 @@ class Tokenizer {
                 case 'parenthesis-end':
                 case 'curly-bracket-end':
                 case 'curly-bracket-start':
+               // case 'bracket-start':
+                //case 'bracket-end':
                 this.tokens.push(token);
                     this.cursor++
                     break;
