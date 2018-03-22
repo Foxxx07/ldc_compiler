@@ -5,7 +5,8 @@ class Parser {
     }
 
     parse(tokens){
-        for (let i = 0; i < tokens.length; i++){
+        var i = 0;
+        while (tokens.length > 0){
             let currentToken = tokens[i];
 
             switch(currentToken.type) {
@@ -28,8 +29,7 @@ class Parser {
                 default:
                     let exp = new ExpressionFactory();
                     exp.createExpression(tokens,i);
-
-                
+                    i++;
             }
         }
     }

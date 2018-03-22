@@ -1,5 +1,5 @@
 import Expression from "./Expression.js";
-import ExpressionFactory from "./ExpressionFactory.js";
+import ExpressionFactory from ".parsing/ExpressionFactory.js";
 import Token from "./Token";
 
 export default class ASTParser{

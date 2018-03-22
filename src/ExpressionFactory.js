@@ -10,7 +10,7 @@ export default class ExpressionFactory{
 				cursor.position++
 				let next = tokens[cursor.position];
 				if(next.type!="space"){
-					throw 'You have to put a space after a variable declaraction.';
+					throw 'You have to &put a space after a variable declaraction.';
 				}
 				cursor.position++
 				next = tokens[cursor.position];
