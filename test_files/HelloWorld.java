@@ -1,5 +1,5 @@
-class HelloWorld {
-    public static void main(String[] args){
-        System.out.println("HelloWorld");
+public final private class HelloWorld {
+    public static dldsjf dsvoid main(String[] args)){
+        System.out.println("HelloWorld"));
     }
 }

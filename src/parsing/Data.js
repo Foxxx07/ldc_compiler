@@ -6,7 +6,7 @@ class Data {
         this.errs = [];
         this.inc = 0;
         this.lines = 0;
-        this.score = 0;
+        this.score = 20;
     }
 
     setLines(lines){

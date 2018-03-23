@@ -2,6 +2,7 @@ const keywords = {
     'int-declaration': { r: /(int\s)/, s: 'int' },
     'double-declaration': { r: /(double\s)/, s: 'double' },
     'string-declaration': { r: /(String\s)/, s: 'String' },
+    'string-tab-declaration': { r: /(String\[\])/, s: 'String[]' },
     'char-declaration': { r: /(char\s)/, s: 'char' },
     'byte-declaration': { r: /(byte\s)/, s: 'byte' },
     'boolean-declaration': { r: /(boolean\s)/, s: 'boolean' },
@@ -26,6 +27,10 @@ const keywords = {
     'main-element': { r: /(main)/, s: 'main' },
     'hashMap': { r: /(HashMap)/, s: 'HashMap' },
     'hashSet': { r: /(HashSet)/, s: 'HashSet' },
-    'class': { r: /(class\s)/, s: 'class' }
+    'class': { r: /(class\s)/, s: 'class' },
+    'double_equal': { r: /(==\s)/, s: '==' },
+    'not_equal': { r: /(!=\s)/, s: '!=' },
+    'angle-bracket-start-equal': { r: /(<=\s)/, s: '<=' },
+    'angle-bracket-end-equal': { r: /(>=\s)/, s: '>=' }
 };
 module.exports = keywords;

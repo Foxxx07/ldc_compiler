@@ -1,21 +1,21 @@
 import ExpressionFactory from "./ExpressionFactory";
+import Data from "./Data";
 
 class Parser {
     constructor() {
+        this.data = new Data();
     }
 
     parse(tokens){
         let i = 0;
         let lines = 1;
-        let score = 20;
+        let score = 0;
         while( i <= tokens.length) {
-            // console.log(tokens.length)
             let currentToken = tokens[i];
             let tokenType;
             if(typeof(currentToken) != "undefined"){
                 tokenType = currentToken.type;
             }
-            // console.log(currentToken);
             switch(tokenType) {
                 case 'space':
                 case 'line-break-r':
@@ -36,25 +36,17 @@ class Parser {
                     lines++;
                     break;
                 default:
-                    //console.log("LINES  = "+ lines)
                     let expressionFactory = new ExpressionFactory();
                     expressionFactory.data.lines = lines;
                     expressionFactory.data.score = score;
+
                     let data = expressionFactory.createExpression(tokens,i);
-                    //console.log(data);
-                    // console.log("inc = "+data.inc)
-                    //console.log("token length = "+tokens.length)
-                    // console.log(data.expr.childs);
 
                     if (data.errs.length > 0){
-                        for (var j in data.errs){
-                            console.log(data.errs[j]);
-                        }
-                        console.log("\n");
+                        this.data.errs.push(data.errs);
+                        this.data.score = this.data.score - (data.score);
                     }
                     i = data.inc;
-                    //this.score(data);
-                    //console.log("i = "+i);
                     break;
             }
             i++;
