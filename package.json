@@ -1,0 +1,19 @@
+{
+  "name": "ldc_compiler",
+  "version": "1.0.0",
+  "description": "Checking style of JAVA",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "./node_modules/.bin/babel-node src/Main.js test_files/HelloWorld.java"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-preset-node6": "^11.0.0",
+    "npm": "^5.7.1",
+    "rimraf": "^2.6.2"
+  }
+}
